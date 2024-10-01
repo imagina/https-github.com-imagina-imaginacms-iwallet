@@ -1,0 +1,14 @@
+{
+    "name": "Iwallet",
+    "alias": "iwallet",
+    "version": "1.0.0",
+	"description": "",
+    "keywords": [],
+    "priority": 1,
+    "providers": [
+        "Modules\\Iwallet\\Providers\\IwalletServiceProvider",
+        "Modules\\Iwallet\\Providers\\EventServiceProvider",
+        "Modules\\Iwallet\\Providers\\RouteServiceProvider"
+    ],
+    "files": []
+}
