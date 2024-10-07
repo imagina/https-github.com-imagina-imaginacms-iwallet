@@ -2,7 +2,6 @@
 
 namespace Modules\Iwallet\Entities;
 
-use function Modules\Ibooking\Entities\trans;
 use Modules\Core\Icrud\Entities\CrudStaticModel;
 
 class Type extends CrudStaticModel
@@ -14,18 +13,18 @@ class Type extends CrudStaticModel
 
   public function __construct()
   {
-    $records = [
+    $this->records = [
       self::DEBT => [
         'id' => self::DEBT,
-        'title' => trans('iwallet::pockets.type.debt'),
-//        'color' => '#f39c12', // Orange (indicating waiting or action needed)
-//        'icon' => 'fas fa-hourglass-half', // Hourglass indicating waiting
+        'title' => trans('iwallet::pockets.type.debt'), // "Debt Pocket"
+        'color' => '#e74c3c', // Red, indicating loss or negative balance
+        'icon' => 'fas fa-minus-circle', // Icon representing a decrease or negative status
       ],
       self::PROFIT => [
         'id' => self::PROFIT,
-        'title' => trans('iwallet::pockets.type.profit'),
-//        'color' => '#f39c12', // Orange (indicating waiting or action needed)
-//        'icon' => 'fas fa-hourglass-half', // Hourglass indicating waiting
+        'title' => trans('iwallet::pockets.type.profit'), // "Earning Pocket"
+        'color' => '#2ecc71', // Green, representing growth or positive balance
+        'icon' => 'fas fa-plus-circle', // Icon representing an increase or positive status
       ]
     ];
   }

@@ -16,9 +16,10 @@ return new class extends Migration {
       $table->increments('id');
       // Your fields...
       $table->integer('type_id');
-      $table->integer('total');
-      $table->integer('entity_id');
-      $table->string('entity_type');
+      $table->integer('total')->default(0);
+      $table->integer('assigned_to_id')->unsigned()->nullable();
+      $table->foreign('assigned_to_id')->references('id')->on(config('auth.table', 'users'))->onDelete('restrict');
+      $table->text('options')->nullable();
       // Audit fields
       $table->timestamps();
       $table->auditStamps();

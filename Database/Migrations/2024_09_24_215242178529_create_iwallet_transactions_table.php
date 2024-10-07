@@ -25,6 +25,7 @@ return new class extends Migration {
       $table->text('comments')->nullable();
       $table->integer('status_id');
 
+
       // Audit fields
       $table->timestamps();
       $table->auditStamps();

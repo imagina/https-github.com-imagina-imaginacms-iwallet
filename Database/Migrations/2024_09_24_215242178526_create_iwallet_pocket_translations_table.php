@@ -17,7 +17,7 @@ class CreateIwalletPocketTranslationsTable extends Migration
       $table->increments('id');
       // Your translatable fields
       $table->text('title');
-      $table->text('description');
+      $table->text('description')->nullable();
 
       $table->integer('pocket_id')->unsigned();
       $table->string('locale')->index();
