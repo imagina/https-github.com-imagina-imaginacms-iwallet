@@ -75,4 +75,17 @@ class EloquentTransactionRepository extends EloquentCrudRepository implements Tr
     //Response
     return $model;
   }
+
+  public function afterCreate(&$model, &$data)
+  {
+    // Update 'to' pocket total
+    if ($model->to_pocket_id) {
+      $model->toPocket->increment('total', $model->amount);
+    }
+
+    // Update 'from' pocket total
+    if ($model->from_pocket_id) {
+      $model->fromPocket->decrement('total', $model->amount);
+    }
+  }
 }

@@ -16,14 +16,14 @@ return new class extends Migration {
       $table->increments('id');
       // Your fields...
       $table->integer('amount');
-      $table->integer('to_pocket_id')->unsigned();
-      $table->integer('from_pocket_id')->unsigned();
-      $table->integer('entity_id');
-      $table->string('entity_type');
+      $table->integer('to_pocket_id')->unsigned()->nullable();
+      $table->integer('from_pocket_id')->unsigned()->nullable();
+      $table->integer('entity_id')->nullable();
+      $table->string('entity_type')->nullable();
       $table->foreign('to_pocket_id')->references('id')->on('iwallet__pockets')->onDelete('cascade');
       $table->foreign('from_pocket_id')->references('id')->on('iwallet__pockets')->onDelete('cascade');
-      $table->text('comments')->nullable();
-      $table->integer('status_id');
+      $table->text('comment')->nullable();
+      $table->integer('status_id')->default(1);
 
 
       // Audit fields
