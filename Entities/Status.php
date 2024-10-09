@@ -3,36 +3,27 @@
 namespace Modules\Iwallet\Entities;
 
 use Modules\Core\Icrud\Entities\CrudStaticModel;
-use function Modules\Ibooking\Entities\trans;
 
 class Status extends CrudStaticModel
 {
-  const PENDING = 0;
+  const COMPLETED = 1;
 
-  const APPROVED = 1;
-
-  const CANCELED = 2;
+  const REVERSED = 0;
 
   public function __construct()
   {
-    $records = [
-      self::PENDING => [
-        'id' => self::PENDING,
-        'title' => trans('iwallet::transactions.status.pending'),
-//        'color' => '#f39c12', // Orange (indicating waiting or action needed)
-//        'icon' => 'fas fa-hourglass-half', // Hourglass indicating waiting
+    $this->records = [
+      self::COMPLETED => [
+        'id' => self::COMPLETED,
+        'title' => trans('iwallet::transactions.status.completed'),
+        'color' => '#28a745', // Green (indicating success or approval)
+        'icon' => 'fas fa-check-circle', // Checkmark for approval
       ],
-      self::APPROVED => [
-        'id' => self::APPROVED,
-        'title' => trans('iwallet::transactions.status.approved'),
-//        'color' => '#f39c12', // Orange (indicating waiting or action needed)
-//        'icon' => 'fas fa-hourglass-half', // Hourglass indicating waiting
-      ],
-      self::CANCELED => [
-        'id' => self::CANCELED,
-        'title' => trans('iwallet::transactions.status.cancelled'),
-//        'color' => '#f39c12', // Orange (indicating waiting or action needed)
-//        'icon' => 'fas fa-hourglass-half', // Hourglass indicating waiting
+      self::REVERSED => [
+        'id' => self::REVERSED,
+        'title' => trans('iwallet::transactions.status.reversed'),
+        'color' => '#95a5a6', // Neutral Gray, representing a rollback or inactive state
+        'icon' => 'fas fa-undo-alt', // Undo icon representing reversal
       ]
     ];
   }

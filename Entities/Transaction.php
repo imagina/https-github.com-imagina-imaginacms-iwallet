@@ -40,19 +40,19 @@ class Transaction extends CrudModel
     if ($this->from_pocket_id && $this->to_pocket_id) return [
       'color' => 'indigo',
       'icon' => 'fa-solid fa-exchange-alt',
-      'label' => '(pt) Transaction'
+      'title' => trans('iwallet::transactions.type.transaction')
     ];
 
     if ($this->from_pocket_id) return [
       "color" => 'red',
       "icon" => 'fa-solid fa-arrow-down',
-      "label" => '(pt) Output'
+      "title" => trans('iwallet::transactions.type.withdrawal')
     ];
 
     if ($this->to_pocket_id) return [
       "color" => 'green',
       "icon" => 'fa-solid fa-arrow-up',
-      "label" => '(pt) Entry'
+      "title" => trans('iwallet::transactions.type.income')
     ];
 
     return null;
@@ -66,5 +66,11 @@ class Transaction extends CrudModel
   public function toPocket()
   {
     return $this->belongsTo(Pocket::class);
+  }
+
+  public function getStatusAttribute()
+  {
+    $statusClass = new Status();
+    return $statusClass->show($this->status_id);
   }
 }

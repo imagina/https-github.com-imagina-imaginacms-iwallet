@@ -2,8 +2,12 @@
 
 return [
   'status' => [
-    'pending' => 'Pendiente',
-    'approved' => 'Aprobada',
-    'cancelled' => 'Cancelada'
+    'completed' => 'Completada',
+    'reversed' => 'Reversada'
+  ],
+  'type' => [
+    'transaction' => 'Movimiento',
+    'income' => 'Ingreso',
+    'withdrawal' => 'Retiro'
   ]
 ];

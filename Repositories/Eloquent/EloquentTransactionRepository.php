@@ -4,6 +4,7 @@ namespace Modules\Iwallet\Repositories\Eloquent;
 
 use Modules\Iwallet\Repositories\TransactionRepository;
 use Modules\Core\Icrud\Repositories\Eloquent\EloquentCrudRepository;
+use Modules\Iwallet\Entities\Status;
 
 class EloquentTransactionRepository extends EloquentCrudRepository implements TransactionRepository
 {
@@ -78,14 +79,30 @@ class EloquentTransactionRepository extends EloquentCrudRepository implements Tr
 
   public function afterCreate(&$model, &$data)
   {
+    $this->madeTransaction($model);
+  }
+
+  public function afterUpdate(&$model, &$data)
+  {
+    if (array_key_exists('status_id', $model->getChanges())) {
+      $this->madeTransaction($model);
+    }
+  }
+
+  public function madeTransaction($model)
+  {
     // Update 'to' pocket total
     if ($model->to_pocket_id) {
-      $model->toPocket->increment('total', $model->amount);
+      if (is_null($model->status_id) || $model->status_id == Status::COMPLETED) {
+        $model->toPocket->increment('total', $model->amount);
+      } else $model->toPocket->decrement('total', $model->amount);
     }
 
     // Update 'from' pocket total
     if ($model->from_pocket_id) {
-      $model->fromPocket->decrement('total', $model->amount);
+      if (is_null($model->status_id) || $model->status_id == Status::COMPLETED) {
+        $model->fromPocket->decrement('total', $model->amount);
+      } else $model->fromPocket->increment('total', $model->amount);
     }
   }
 }
