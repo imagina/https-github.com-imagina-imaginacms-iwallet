@@ -33,17 +33,12 @@ class Pocket extends CrudModel
   protected $fillable = [
     'type_id',
     'total',
-    'assigned_to_id',
+    'entity_type',
+    'entity_id',
     'options'
   ];
 
   protected $casts = ['options' => 'array'];
-
-  public function assignedTo()
-  {
-    $driver = config('asgard.user.config.driver');
-    return $this->belongsTo("Modules\\User\\Entities\\{$driver}\\User");
-  }
 
   public function getTypeAttribute()
   {
