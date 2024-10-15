@@ -11,6 +11,7 @@ class CacheTransactionDecorator extends BaseCacheCrudDecorator implements Transa
     {
         parent::__construct();
         $this->entityName = 'iwallet.transactions';
+        $this->tags = ["iwallet.pockets"];
         $this->repository = $transaction;
     }
 }
