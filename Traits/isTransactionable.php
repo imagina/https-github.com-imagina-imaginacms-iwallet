@@ -60,7 +60,7 @@ trait isTransactionable
         $transactionRepository->create([
           'amount' => $transaction['amount'],
           'comment' => $transaction['comment'] ?? null,
-          'to_pocket_id' => $pocket->id ?? $pocketId,
+          ($transaction['pocketType'] ?? 'to') . "_pocket_id" => $pocket->id ?? $pocketId,
           'entity_type' => $this->getMorphClass(),
           'entity_id' => $this->id,
         ]);
