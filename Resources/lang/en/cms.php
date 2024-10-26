@@ -2,7 +2,9 @@
 
 return [
   'sidebar' => [
-    'adminPockets' => 'Wallet'
+    'adminGroup' => 'Wallet',
+    'adminPockets' => 'Pockets',
+    'adminTransactions' => 'Transactions'
   ],
   'newPocket' => 'New Pocket',
   'updatePocket' => 'Update Pocket',
@@ -10,6 +12,7 @@ return [
   'pocket' => 'Pocket | Pockets',
   'transaction' => 'Transaction | Transactions',
   'origin' => 'Origin | Origins',
-  'destination' => 'Destination'
+  'destination' => 'Destination',
+  'transactionsDate' => "Transactions Date",
 ];
 

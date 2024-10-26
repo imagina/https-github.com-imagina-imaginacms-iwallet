@@ -2,7 +2,9 @@
 
 return [
   'sidebar' => [
-    'adminPockets' => 'Billetera'
+    'adminGroup' => 'Billetera',
+    'adminPockets' => 'Bolsillos',
+    'adminTransactions' => 'Transacciones'
   ],
   'newPocket' => 'Nuevo Bolsillo',
   'updatePocket' => 'Actualizar Bolsillo',
@@ -11,5 +13,6 @@ return [
   'transaction' => 'Transacción | Transacciones',
   'origin' => 'Origen | Origenes',
   'destination' => 'Destino',
+  'transactionsDate' => "Fecha de Transacciones"
 ];
 

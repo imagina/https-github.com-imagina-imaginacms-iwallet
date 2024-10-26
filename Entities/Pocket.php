@@ -45,4 +45,16 @@ class Pocket extends CrudModel
     $classType = new Type();
     return $classType->show($this->type_id);
   }
+
+// Define the relationship for transactions sent from this pocket
+  public function fromPocketTransactions()
+  {
+    return $this->hasMany(Transaction::class, 'from_pocket_id');
+  }
+
+  // Define the relationship for transactions received by this pocket
+  public function toPocketTransactions()
+  {
+    return $this->hasMany(Transaction::class, 'to_pocket_id');
+  }
 }

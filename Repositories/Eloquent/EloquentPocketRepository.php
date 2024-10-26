@@ -2,8 +2,10 @@
 
 namespace Modules\Iwallet\Repositories\Eloquent;
 
+use Modules\Iwallet\Entities\Status;
 use Modules\Iwallet\Repositories\PocketRepository;
 use Modules\Core\Icrud\Repositories\Eloquent\EloquentCrudRepository;
+use Carbon\Carbon;
 
 class EloquentPocketRepository extends EloquentCrudRepository implements PocketRepository
 {
@@ -46,6 +48,24 @@ class EloquentPocketRepository extends EloquentCrudRepository implements PocketR
      * if (isset($filter->status)) $query->where('status', $filter->status);
      *
      */
+
+    // get date range for transactions
+    $startDate = $filter->transactionsDate->from ?? Carbon::today();
+    $endDate = $filter->transactionsDate->to ?? Carbon::today();
+
+    //Include the transactions by range date
+    $query->with('fromPocketTransactions', function ($query) use ($startDate, $endDate) {
+      $query->whereDate('created_at', '>=', $startDate)
+        ->whereDate('created_at', '<=', $endDate)
+        ->where('status_id', Status::COMPLETED);
+    });
+
+    //Include the transactions by range date
+    $query->with('toPocketTransactions', function ($query) use ($startDate, $endDate) {
+      $query->whereDate('created_at', '>=', $startDate)
+        ->whereDate('created_at', '<=', $endDate)
+        ->where('status_id', Status::COMPLETED);
+    });
 
     //Response
     return $query;
